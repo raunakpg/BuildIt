@@ -1,0 +1,67 @@
+{% extends "auctions/registerLayout.html" %}
+{% load static %}
+
+{% block title %}
+    betBid - Register
+{% endblock %}
+
+{% block body %}
+
+<style>
+    .brickphoto{
+        background-image: url("https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=");
+        /* color: cornsilk; */
+
+    }
+    .bgreg{
+        /* color: aqua; */
+    }
+</style>
+<h1 class="heading brickphoto" style="color: cornsilk;">Register as seller</h1>
+<main class="register bgreg" style="background-image: none; background-color: coral;">
+    <img src="{% static 'auctions/images/add_user.svg' %}" alt="">
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+
+        {% if message %}
+        <div class="msg">{{ message }}</div>
+        {% endif %}
+        <div>
+            <input  autofocus type="text" name="username" placeholder="Username" required>
+            <i class="fa fa-user"></i>
+        </div>
+        <div>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <i class="fa fa-envelope"></i>
+        </div>
+
+        <!-- <div>
+            <input type="text" name="GST No." placeholder="GST No." required>
+            <i class="fa fa-file"></i>
+        </div>
+
+        <div>
+            <input type="text" name="Licence No." placeholder="Licence No." required>
+            <i class="fa fa-file"></i>
+        </div> -->
+
+
+        <div>
+            <input type="password" name="password" placeholder="Password" required>
+            <i class="fa fa-lock"></i>
+        </div>
+        <div>
+            <input  type="password" name="confirmation" placeholder="Confirm Password" required>
+            <i class="fa fa-lock"></i>
+        </div>
+
+
+        
+
+
+
+        <input class="button" type="submit" value="Register">
+        <span>Already have an account? <a href="{% url 'loginSeller' %}">Log In here.</a></span> 
+    </form> 
+</main>
+{% endblock %}

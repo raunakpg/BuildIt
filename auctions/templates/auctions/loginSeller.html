@@ -1,0 +1,40 @@
+{% extends "auctions/registerLayout.html" %}
+{% load static %}
+
+{% block title %}
+    betBid - LogIn
+{% endblock %}
+
+{% block body %}
+<style>
+    .brickphoto{
+        background-image: url("https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=");
+        /* color: cornsilk; */
+
+    }
+</style>
+<h1 class="heading brickphoto" style="color: cornsilk;">LogIn as seller</h1>
+<main class="login" style="background-image: none; background-color: coral;">
+    <img src="{% static 'auctions/images/sign_in.svg' %}" alt="">
+    <form action="{% url 'loginSeller' %}" method="post">
+        {% csrf_token %}
+        
+        {% if message %}
+        <div class="msg">{{ message }}</div>
+        {% endif %}
+        <div class="userwithicon">
+            <input autofocus class="username" type="text" name="username" placeholder="Username" required>
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="passwithicon">
+            <input class="password" type="password" name="password" placeholder="Password" required>
+            <i class="fa fa-lock"></i>
+        </div>
+
+        <input class="button" name="top" type="submit" value="LogIn">
+        <!-- <a href="{% url 'sellerIndex' %}" class="button" type="submit">LogIn</a> -->
+        <span>Don't have an account? <a href="{% url 'registerSeller' %}">Register here as Seller.</a></span>
+    </form>
+
+</main>
+{% endblock %}

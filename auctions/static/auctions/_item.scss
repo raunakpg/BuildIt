@@ -1,0 +1,264 @@
+main.item {
+    position: relative;
+    z-index: 0;
+    div.watchlist {
+        position: absolute;
+        z-index: 1;
+        right: 12%;
+        top: 16px;
+        div.watchlist_container {
+            position: relative;
+            z-index: 2;
+            button {
+                padding: 2px 8px;
+                border-radius: 15px;
+                font-size: 15px;
+                color: white;
+                cursor: pointer;
+                outline: none;
+            }
+            button.male {
+                position: absolute;
+                z-index: -1;
+                top: 0.2px;
+                border: none;
+                right: 0px;
+                // background-color: #ff2020;
+                font-weight: bolder;
+                padding: 4px;
+                padding-top: 3.5px;
+                padding-right: 65px;
+                padding-left: 7px;
+            }
+            button.female {
+                // box-shadow: 0px 0px 5px rgb(21, 255, 0);
+                background-color: rgb(112, 112, 112);
+                font-family: monospace;
+            }
+            button.female:hover + button.male {
+                right: 38px;
+                transition-duration: 0.5s;
+                transition-timing-function: ease-out;
+            }
+            button.male:hover {
+                right: 50px;
+                transition-duration: 0.2s;
+                transition-timing-function: ease-out;
+            }
+        }
+    }
+    div.template {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        img {
+            border: 1px solid gray;
+            border-radius: 5px;
+            height: 475px;
+            width: auto;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        div.details {
+            padding: 0px;
+            p {
+                white-space: pre-line;
+                font-size: 18px;
+                font-family: sans-serif; 
+                color: rgb(74, 75, 18);
+                margin-top: 5px;
+            }
+            h2 {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                border: 1px solid gray;
+                border-radius: 5px;
+                padding: 10px;
+                box-shadow: 0px 2px 3px rgb(78, 78, 78);
+                background: linear-gradient(to right, #c31432, #240b36);
+                color: white;
+                span {
+                    color: rgb(199, 199, 199);
+                }
+            }
+        }
+    }
+    div.info {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 20px 0px;
+        margin: 15px 0px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        box-shadow: 0px 2px 3px rgb(78, 78, 78);
+        background: linear-gradient(to right, #fdc830, #f37335);
+        h3, h4, h5 {
+            font-size: 20px;
+            font-family: "Comfortaa";
+            margin: 0px;
+            span {
+                color: rgb(133, 41, 141);
+            }
+        }
+    }
+    div.bid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin-top: 35px;
+        form {
+            flex: 1.2;
+            margin-right: 15px;
+            section {
+                position: relative;
+                input {
+                    padding: 6px;
+                    padding-left: 22px;
+                    width: 100%;
+                    height: 28px;
+                    border-radius: 5px;
+                    border: 1px solid rgb(78, 78, 78);
+                    font-size: 18px;
+                }
+                i {
+                    position: absolute;
+                    font-size: 18px;
+                    left: 9px;
+                    top: 5px;
+                }
+            }
+            input#bid_button, button {
+                margin-top: 40px;
+                margin-left: 42.5%;
+                width: 15%;
+                height: 40px;
+                font-size: 20px;
+                font-weight: bold;
+                font-family: 'Comfortaa', sans;
+                color: red;
+                outline: none;
+                box-shadow: 0px 0px 5px rgb(182, 182, 182);
+                border: 3px solid rgb(6, 185, 0);
+                border-radius: 10px;
+                background-color: rgb(172, 252, 189);
+            }
+            button {
+                margin-top: 0;
+                margin-left: 35%;
+                width: 30%;
+            }
+            input#bid_button:hover , button:hover {
+                box-shadow: 0px 3px 8px rgb(104, 104, 104);
+            }
+
+        }
+        div.bid_history {
+            flex: 1;
+            border: 4px solid rgb(48, 48, 48);
+            border-radius: 10px;
+            background: #80fffd;
+            background: radial-gradient(circle, #80fffd 0%, #77bffd 100%);
+            padding: 0px 15px;
+            details {
+                summary { 
+                    border: none;
+                    outline: none;
+                    padding: 4px;
+                    width: 100%; 
+                    cursor: pointer;
+                    font-weight: bold;
+                    font-size: 23px;
+                }
+                ol {
+                    padding: 4px;
+                    margin: 0px;
+                    margin-left: 36px;
+                    color: rgb(25, 0, 167);
+                    font-size: 17px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    li {
+                        padding: 5px;
+                    }
+                    img {
+                        height: 25px;
+                    }
+                }
+            }
+            hr {
+                border: none;
+                height: 2px;
+                background-color: rgb(119, 119, 119);
+            }
+            ul {
+                padding-left: 22px;
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                color: red;
+            }
+        }
+    }
+    div.comments {
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 50px;
+        padding-bottom: 0px;
+        h3 {
+            font-size: 28px;
+            color: rgb(37, 37, 37);
+            margin: 8px 0px;
+        }
+        form {
+            textarea {
+                width: 100%;
+                padding: 10px;
+                margin-top: 8px;
+                font-size: 16px;
+            }
+            input {
+                padding: 10px 16px;
+                margin-top: 5px;
+                margin-bottom: 10px;
+                margin-left: 91%;
+                font-size: 16px;
+                font-weight: 600;
+                color: white;
+                background-color: rgb(42, 42, 253);
+                border: none;
+                outline: none;
+            }
+        }
+        div.comment_history {
+            h5 {
+                font-size: 14px;
+                margin-bottom: 0px;
+                span {
+                    color: rgb(109, 109, 109);
+                    font-weight: 200;
+                }
+            }
+            p {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+div#closed {
+    position: absolute;
+    z-index: 1;
+    top: 42%;
+    left: 167px;
+    img {
+        width: 42%;     
+    }
+}
+h2.winner {
+    position: absolute;
+    top: 19.9%;
+    text-align: center;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    span {
+        background-color: yellow;
+    }
+}

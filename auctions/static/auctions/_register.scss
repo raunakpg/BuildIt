@@ -1,0 +1,73 @@
+main.register {
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url(images/register_bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: padding-box;
+    background-position: 50% 5%;
+    min-height: 73.8vh;
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin: auto;
+        padding: 40px 30px;
+        border-radius: 5px;
+        background-color: rgb(253, 231, 144);
+        box-shadow: 0px 0px 10px rgb(116, 115, 115);
+        span, .msg, input {
+            margin: 8px;
+            padding: 2px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .msg {
+            color: red;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+        input:not(.button) {
+            padding-left: 30px;
+            width: 95%;
+        }
+        div {
+            position: relative;
+            i {
+                position: absolute;
+                font-size: 22px;
+                color: rgb(155, 153, 153);
+                top: 12px;
+                left: 17px;
+            }
+            .fa-envelope {
+                font-size: 18px;
+                left: 15px;
+            }
+        }
+
+        input:focus{
+            box-shadow: 0px 0px 10px #61f870;;
+            border: 2px solid #08E41E;
+            outline: none;
+            transition-duration: 0.2s;
+        }
+        div input:focus + i{
+            color: #08E41E;
+            transition-duration: 0.2s;
+        }
+        .button {
+            text-align: center;
+            padding: 2px 10px;
+            font-size: 18px;
+            font-family: poppins, sans-serif;
+            color: white;
+            background-color: rgb(9, 204, 218);
+            border: 2px solid rgb(9, 204, 218);
+        }
+    }
+    img {
+        width: 400px;
+        margin: auto;
+    }
+}

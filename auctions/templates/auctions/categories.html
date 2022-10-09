@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    betBid - Categories
+{% endblock %}
+
+{% block body %}
+<h1 class="heading">Categories for Active Listings</h1>
+<main class="categories">
+    <ul>
+        {% for category in categories %}
+        <li><a href="{% url 'category' category=category.0 %}">{{ category.0 }}</a></li>    
+        {% endfor %}
+    </ul>    
+</main>
+{% endblock %}
