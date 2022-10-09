@@ -5,20 +5,22 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.urls import reverse
+import logging
 
 from .models import User, ListItem, Comment, Bid
 
 def sellerIndex(request):
     items = ListItem.objects.filter(active=True)
     return render(request, "auctions/sellerIndex.html", {
-        "heading" : "Active Listings",
+        "heading" : "Active Requests",
         "items" : items
     })
 
 def index(request):
-    items = ListItem.objects.filter(active=True)
+    #items = ListItem.objects.filter(active=True)
+    items = ListItem.objects.filter(creator=request.user)
     return render(request, "auctions/index.html", {
-        "heading" : "Active Listings",
+        "heading" : "Your requested items",
         "items" : items
     })
 
@@ -32,15 +34,17 @@ def inactive(request):
     })
 
 def all(request):
-    items = ListItem.objects.all()
+    #items = ListItem.objects.all()
+    items = ListItem.objects.filter(creator=request.user)
     return render(request, "auctions/index.html", {
-        "heading" : "All Listings",
+        "heading" : "Your requested items",
         "items" : items
     })
 def sellerAll(request):
-    items = ListItem.objects.all()
+    #items = ListItem.objects.all()
+    items = ListItem.objects.filter(active=True)
     return render(request, "auctions/sellerIndex.html", {
-        "heading" : "All Listings",
+        "heading" : "Active Requests",
         "items" : items
     })
 
@@ -77,17 +81,20 @@ def my_listings(request):
     })
 
 def wins(request):
+    #logging.basicConfig(level=logging.INFO)
+    #logger = logging.getLogger('myapp')
+    #logger.info(request.user)
     temps = ListItem.objects.filter(active=False)
     items_ids = []
     for temp in temps:
-        bids = temp.item.all().order_by('-bid')
+        bids = temp.item.all().order_by('bid')
         if bids:
             highestbid = bids.first()
-            if highestbid.bidder.username == request.user:
+            if str(highestbid.bidder.username) == str(request.user):
                 items_ids.append(temp.id)
     items = ListItem.objects.filter(pk__in = items_ids)
-    return render(request, "auctions/index.html", {
-        "heading" : "Your Wins",
+    return render(request, "auctions/sellerIndex.html", {
+        "heading" : "Confirmed Deals",
         "items" : items
     })
 
@@ -168,12 +175,14 @@ def sellerItem(request, item_id):
     item = ListItem.objects.get(id = item_id)
     bids = item.item.all().order_by('bid')
     comments = item.listing.all()
+    
     watchlist_button = None
     color = None
     next_bid = None
     winner = bids.first()
     if winner:
         winner = winner.bidder.username
+        #winner = winner.item.title
     if item.active:
         price_tag = "Current Price Offered"
         style = None

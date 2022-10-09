@@ -19,6 +19,7 @@
 <main class="index">
     <div class="listings">
         {% for item in items %}
+       
             <div class="item" style="{% if item.active %}background-image: linear-gradient( 109.5deg,  #00ceee 11.2%, #3055fc 91.1% );{% else %}background-image: linear-gradient(to right, #ff416c, #ff4b2b);{% endif %}">
                 <a href="{% url 'sellerItem' item_id=item.id %}">
                     {% if item.image %}
