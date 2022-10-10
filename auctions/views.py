@@ -309,7 +309,7 @@ def loginSeller(request):
 def logout_view(request):
     logout(request)
     return render(request, "auctions/login.html", {
-        "message": "*You have successfully logged out. 👍"
+        "message": "*You have successfully logged out."
     })
 
 

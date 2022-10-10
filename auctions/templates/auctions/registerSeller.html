@@ -35,15 +35,15 @@
             <i class="fa fa-envelope"></i>
         </div>
 
-        <!-- <div>
-            <input type="text" name="GST No." placeholder="GST No." required>
+        <div>
+            <input type="number" name="GST No." placeholder="GST No." required>
             <i class="fa fa-file"></i>
         </div>
 
         <div>
-            <input type="text" name="Licence No." placeholder="Licence No." required>
+            <input type="number" name="Licence No." placeholder="Licence No." required>
             <i class="fa fa-file"></i>
-        </div> -->
+        </div>
 
 
         <div>
@@ -61,7 +61,7 @@
 
 
         <input class="button" type="submit" value="Register">
-        <span>Already have an account? <a href="{% url 'loginSeller' %}">Log In here.</a></span> 
+        <span>Already have an account? <a href="{% url 'loginSeller' %}">Log In here as Seller.</a></span> 
     </form> 
 </main>
 {% endblock %}

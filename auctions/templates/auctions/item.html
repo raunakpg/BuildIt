@@ -37,11 +37,15 @@
         <img src="https://i.ibb.co/MBbF9nV/defaultimg.png" alt="defaultimg">
         {% endif %}
         <div class="details">
-            <p>{{item.description}}</p>
-            <h2><span>{{price_tag}}:</span> ₹ {{item.current_price}}</h2>
+            <p style="    border: 2px solid;
+            /* margin: auto; */
+            padding-left: 22px;
+            line-height: 36px;
+            font-size: 1.5rem;">{{item.description}}</p>
+            <h2 style="background: teal; !important"><span>{{price_tag}}:</span> ₹ {{item.current_price}}</h2>
         </div>
     </div>
-    <div class="info">
+    <div class="info" style="background: antiquewhite;">
         <h3><span>Listed on :</span> {{item.date}}</h3>
         <h5><span>Owner :</span> {{item.creator}}</h5>
         <h4><span>Category :</span> {{item.category.upper}}</h4> 
@@ -61,16 +65,16 @@
             {% else %}
             <form action="{% url 'close' item_id=item.id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit">Confirm</button>
+                <button type="submit" style="color: black;">Confirm</button>
             </form>
             {% endif %}    
         {% endif %}
-            <div class="bid_history" style="background-color: lightcyan !important;">
+            <div class="bid_history" style="background: lightcyan !important;">
                 <details open>
                     <summary>Available Quotations:</summary>
                     <ol reversed>
                         {% for bid in bids %}
-                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == item.current_price %}(Highest Bidder) <img src="{% static 'auctions/images/highest-bid.png' %}">{% endif %}</li>
+                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == item.current_price %}(Lowest Price){% endif %}</li>
                         {% empty %}
                         <p> -- No quotations to display -- </p>
                         {% endfor %}
@@ -78,7 +82,7 @@
                 </details>
                 <hr noshade>
                 <ul>
-                    <li>₹ {{item.reserve_price}} : @{{item.creator}} (Current Price Offered)</li>
+                    <li style="color: black; font-weight: bold;">₹ {{item.reserve_price}} : @{{item.creator}} (Current Price Offered)</li>
                 </ul>
             </div>
     </div>
