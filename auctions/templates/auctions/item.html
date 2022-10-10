@@ -19,7 +19,7 @@
 </style>
 <h1 class="heading brickphoto" style="color: cornsilk;">{{item.title}}</h1>
 <main class="item" style="{{style}}" >
-    {% if user.is_authenticated %}
+    <!-- {% if user.is_authenticated %}
         <div class="watchlist">
             <div class="watchlist_container">
                 <form action="{% url 'item' item_id=item.id %}" method="GET">
@@ -28,13 +28,13 @@
                 </form>
             </div>
         </div>
-    {% endif %}
+    {% endif %} -->
     <div class="template">
         {% if item.image %}
         <img src="{{ item.image.url }}" alt="{{item.title}}">
         {% else %}
         <!-- <img src="{% static 'auctions/images/noimage.png' %}" alt="Image not available"> -->
-        <a href="https://ibb.co/hFJCKGq"><img src="https://i.ibb.co/hFJCKGq/mat2.jpg" alt="mat2"></a>
+        <img src="https://i.ibb.co/MBbF9nV/defaultimg.png" alt="defaultimg">
         {% endif %}
         <div class="details">
             <p>{{item.description}}</p>
@@ -65,7 +65,7 @@
             </form>
             {% endif %}    
         {% endif %}
-            <div class="bid_history">
+            <div class="bid_history" style="background-color: lightcyan !important;">
                 <details open>
                     <summary>Available Quotations:</summary>
                     <ol reversed>

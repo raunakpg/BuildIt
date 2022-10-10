@@ -1,4 +1,4 @@
-{% extends "auctions/layout.html" %}
+{% extends "auctions/aboutLayout.html" %}
 {% load static %}
 
 {% block title %}
@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body %}
+
 <style>
     .brickphoto{
         background-image: url("https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=");
@@ -15,12 +16,22 @@
     .bgreg{
         /* color: aqua; */
     }
+
+    
 </style>
 <h1 class="heading brickphoto" style="color: cornsilk;">About Us</h1>
 <main class="about">
-    <p>betBid.com ia an e-auction site. Here, any user can put an item to auction among our large user-base of buyers.</p>
-    <img src="{% static 'auctions/images/eauction.png' %}" alt="e-auction">
+    <p>BuildIt is the construction material services aggregator focused on needs of the buyer. In this novel approach, the buyer first describes his needs and all the sellers give quotations. Price validation helps the buyer to make the right decision. Our fraud detection system ensures that only genuine sellers are allowed to operate.</p>
+    <!-- <img src="{% static 'auctions/images/eauction.png' %}" alt="e-auction"> -->
     <hr>
-    <img src="{% static 'auctions/images/img1.png' %}" alt="bid">
+    <!-- <img src="{% static 'auctions/images/img1.png' %}" alt="bid"> -->
+    <p>Developed by :</p>
+    <ul style="font-family: var(--bs-body-font-family); font-size:larger">
+        <li>Shantanu Patil</li>
+        <li>Raunak Gautam</li>
+        <li>Sudhanshu Patil</li>
+        <li>Shivam Ghadge</li>
+    </ul>
+
 </main>
 {% endblock %}

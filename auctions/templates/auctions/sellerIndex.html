@@ -20,12 +20,12 @@
     <div class="listings">
         {% for item in items %}
        
-            <div class="item" style="{% if item.active %}background-image: linear-gradient( 109.5deg,  #00ceee 11.2%, #3055fc 91.1% );{% else %}background-image: linear-gradient(to right, #ff416c, #ff4b2b);{% endif %}">
+            <div class="item" style="{% if item.active %}background-color: #c6ebeb; box-shadow:none; {% else %}background-image: linear-gradient(to right, #ff416c, #ff4b2b); box-shadow:none;{% endif %}">
                 <a href="{% url 'sellerItem' item_id=item.id %}">
                     {% if item.image %}
                     <img src="{{ item.image.url }}" alt="{{item.title}}">
                     {% else %}
-                    <img src="{% static 'auctions/images/noimage.png' %}" alt="Image not available">
+                    <img src="https://i.ibb.co/MBbF9nV/defaultimg.png" alt="defaultimg" >
                     {% endif %}
                 </a>
                 <div class="details">
