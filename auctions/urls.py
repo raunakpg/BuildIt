@@ -16,6 +16,7 @@ urlpatterns = [
     path('all/', views.all, name="all"),
     path('sellerAll/', views.sellerAll, name="sellerAll"),
     path('close/<int:item_id>', views.close, name="close"),
+    path('checkcurr/<int:item_id>', views.checkcurr, name="checkcurr"),
     path('new/', views.new, name="new"),
     path('item/<int:item_id>', views.item, name="item"),
     path('sellerItem/<int:item_id>', views.sellerItem, name="sellerItem"),

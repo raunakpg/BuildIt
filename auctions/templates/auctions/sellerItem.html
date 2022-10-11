@@ -38,6 +38,7 @@
     <div class="info" style="background: antiquewhite;">
         <h3><span>Listed on :</span> {{item.date}}</h3>
         <h5><span>Owner :</span> {{item.creator}}</h5>
+        <h5><span>Contact No. :</span> {{item.contact}}</h5>
         <h4><span>Category :</span> {{item.category.upper}}</h4> 
     </div>
     <div class="bid">
@@ -66,7 +67,7 @@
                     <summary>Available Quotations:</summary>
                     <ol>
                         {% for bid in bids %}
-                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == item.current_price %}(Lowest Price){% endif %}</li>
+                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == temp %}(Lowest Price){% endif %}</li>
                         {% empty %}
                         <p> -- No quotations to display -- </p>
                         {% endfor %}

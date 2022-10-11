@@ -104,10 +104,13 @@ def new(request):
         new_item = ListItem()
         new_item.active = True
         new_item.title = request.POST["title"]
+       
         new_item.description = request.POST["description"]
         new_item.reserve_price = request.POST["reserve_price"]
         #new_item.reserve_price=0
         new_item.current_price = request.POST["reserve_price"]
+
+        new_item.contact = request.POST["contact"]
         new_item.category = request.POST["category"]
         new_item.creator = request.user
         if "image" in request.FILES:
@@ -152,10 +155,10 @@ def item(request, item_id):
             watchlist_button = "+"
             color = "#15ff00"
 
-        if bids:
-            next_bid = int(item.current_price + item.current_price/10)
-        else:
-            next_bid = item.reserve_price
+        # if bids:
+        #     next_bid = int(item.current_price + item.current_price/10)
+        # else:
+        #     next_bid = item.reserve_price
 
 
     return render(request, "auctions/item.html", {
@@ -208,10 +211,10 @@ def sellerItem(request, item_id):
             watchlist_button = "+"
             color = "#15ff00"
 
-        if bids:
-            next_bid = int(item.current_price + item.current_price/10)
-        else:
-            next_bid = item.reserve_price
+        # if bids:
+        #     next_bid = int(item.current_price + item.current_price/10)
+        # else:
+        #     next_bid = item.reserve_price
 
 
     return render(request, "auctions/sellerItem.html", {
@@ -246,6 +249,29 @@ def bid(request, item_id):
         item.current_price = request.POST["bid"]
         item.save()
     return redirect("sellerItem", item_id=item_id)
+
+
+@login_required(login_url="login")
+def checkcurr(request, item_id):
+    # return redirect("item", item_id=item_id)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('myapp')
+    item = ListItem.objects.get(id = item_id)
+    user = User.objects.get(username= request.user)
+    if request.method == "POST":
+        bid = Bid()
+        bid.item = item
+        bid.bidder = user
+        logger.info(request.POST["checks"])
+        bid.bid = request.POST["checks"]
+        # bid.save()
+
+        item.current_price = request.POST["checks"]
+        logger.info(item.current_price)
+        item.save()
+
+    close(request, item_id=item_id)
+    return redirect("item", item_id=item_id)
 
 @login_required(login_url="login")
 def comment(request, item_id):

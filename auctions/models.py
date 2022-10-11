@@ -16,10 +16,12 @@ class ListItem(models.Model):
     description = models.TextField(max_length=1000)
     reserve_price = models.PositiveIntegerField() 
     current_price = models.PositiveIntegerField()
+    contact=models.CharField(max_length=15, default='000000')
     image = models.ImageField(blank=True, null=True, upload_to = '%Y/%m/%d/')
     category = models.CharField(max_length=50, choices=CATEGORIES, default='NONE')
     creator = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)  
+    
 
     def delete(self, *args, **kwargs):
         self.image.delete()

@@ -31,15 +31,17 @@
             <label for="id_reserve_price" style="display: none;
             visibility: hidden;">*Reserve Price:</label>
             <section class="inr">
-                <input type="number" name="reserve_price" min="0" required id="id_reserve_price" style="display: none;
-                visibility: hidden;">
+                <input type="number" name="reserve_price" min="0" id="id_reserve_price" style="display: none;
+                visibility: hidden;" value=0>
                 <i class="fa fa-inr" style="display: none;
                 visibility: hidden;"></i>
             </section>
         </div>
         <div>
-            <label for="id_image">Some image to understand your requirements better [Optional]:</label>
-            <input type="file" name="image" accept="image/*" id="id_image">
+            <!-- <label for="id_image">Some image to understand your requirements better [Optional]:</label>
+            <input type="file" name="image" accept="image/*" id="id_image"> -->
+            <label for="id_contact">*Contact number:</label>
+            <input type="text" name="contact" maxlength="15" required id="id_contact"> 
         </div>
         <div>
             <label for="id_category">Purpose:</label>

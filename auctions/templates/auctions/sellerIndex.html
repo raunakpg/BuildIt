@@ -32,7 +32,7 @@
                     <a href="{% url 'sellerItem' item_id=item.id %}">
                         <h2 style="color: black;">{{ item.title }}</h2>
                         <p style="color: #422d2d;">{{ item.description }}</p>
-                        <h3 style="color: black;">{% if item.active %}Current Price{% else %}Sold at{% endif %}: ₹ {{item.current_price}}</h3>
+                        <h3 style="color: black;">{% if item.active %}Current Price Offered{% else %}Sold at{% endif %}: ₹ {{item.current_price}}</h3>
                     </a>
                 </div>
             </div>
