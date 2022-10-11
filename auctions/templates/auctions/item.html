@@ -72,7 +72,7 @@
             <div class="bid_history" style="background: lightcyan !important;">
                 <details open>
                     <summary>Available Quotations:</summary>
-                    <ol reversed>
+                    <ol>
                         {% for bid in bids %}
                         <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == item.current_price %}(Lowest Price){% endif %}</li>
                         {% empty %}
@@ -80,10 +80,10 @@
                         {% endfor %}
                     </ol>
                 </details>
-                <hr noshade>
-                <ul>
+                <!-- <hr noshade> -->
+                <!-- <ul>
                     <li style="color: black; font-weight: bold;">₹ {{item.reserve_price}} : @{{item.creator}} (Current Price Offered)</li>
-                </ul>
+                </ul> -->
             </div>
     </div>
     <div class="comments">

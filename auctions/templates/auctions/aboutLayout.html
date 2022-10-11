@@ -31,7 +31,7 @@
     <body>
         
         <nav class="titlebar">
-            <img src="{% static 'auctions/images/favicon.png' %}" alt="">
+            <img src="https://i.ibb.co/VBtpqfw/favco.png" alt="">
             <h1>BuildIt<span> .com</span></h1>
 
             <div id="sign">
@@ -52,8 +52,8 @@
                         </label>
                     </div>
                 {% else %}
-                    <a href="{% url 'register' %}"><button class="register">Register</button></a>
-                    <a href="{% url 'login' %}"><button class="login">LogIn</button></a>
+                    <a href="{% url 'register' %}"><button class="register">Register as Buyer</button></a>
+                    <a href="{% url 'registerSeller' %}"><button class="login">Register as Seller</button></a>
                 {% endif %}
             </div>
         </nav>
