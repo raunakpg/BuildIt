@@ -20,7 +20,7 @@
 <h1 class="heading brickphoto" style="color: cornsilk;">Register as seller</h1>
 <main class="register bgreg" style="background-image: none; background-color: coral;">
     <img src="{% static 'auctions/images/add_user.svg' %}" alt="">
-    <form action="{% url 'register' %}" method="post">
+    <form action="{% url 'registerSeller' %}" method="post">
         {% csrf_token %}
 
         {% if message %}
