@@ -21,6 +21,7 @@ class ListItem(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORIES, default='NONE')
     creator = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now=True)  
+    title1 = models.CharField(max_length=50,default='000000')
     
 
     def delete(self, *args, **kwargs):
