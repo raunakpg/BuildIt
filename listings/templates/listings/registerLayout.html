@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title style="font-family: 'Montserrat';">BuildIt</title>
+        <link rel="shortcut icon" href="https://i.ibb.co/VBtpqfw/favco.png" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="{% static 'listings/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        
+        <nav class="titlebar">
+            <img src="https://i.ibb.co/VBtpqfw/favco.png" alt="">
+            <h1>BuildIt<span> .com</span></h1>
+
+            <div id="sign">
+                {% if user.is_authenticated %}
+                    <span>Signed in as <strong>{{ user.username }}</strong></span>
+                    <div class="user">
+                        <input type="checkbox" id="btnControl">
+                        <label for="btnControl">
+                            <img src="{% static 'listings/images/user.png' %}" title="{{ user.username }}">
+                            <div id="user-links">
+                                <ul>
+                                    <li><a href="{% url 'watchlist' %}">Watchlist</a></li><hr>
+                                    <li><a href="{% url 'my_listings' %}">My Listings</a></li><hr>
+                                    <!-- <li><a href="{% url 'wins' %}">Wins</a></li><hr>  -->
+                                    <li><a href="{% url 'logout' %}"><button class="logout">LogOut</button></a></li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                {% else %}
+                    <a href="{% url 'register' %}"><button class="register">Register as buyer</button></a>
+                    <a href="{% url 'registerSeller' %}"><button class="login">Register as seller</button></a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <nav class="navbar" style="background-image: url('https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=');">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+            </ul>
+        </nav>
+        {% block body %}
+        {% endblock %}
+        <footer>
+            <p>Designed &amp; Created by Team B-01</p>
+        </footer>
+    </body>
+</html>

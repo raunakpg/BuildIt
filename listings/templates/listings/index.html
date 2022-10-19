@@ -1,0 +1,44 @@
+{% extends "listings/layout.html" %}
+{% load static %}
+{% block title %}
+    betBid - {{heading}}
+{% endblock %}
+
+{% block body %}
+<style>
+    .brickphoto{
+        background-image: url("https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=");
+        /* color: cornsilk; */
+
+    }
+    .bgreg{
+        /* color: aqua; */
+    }
+</style>
+<h1 class="heading brickphoto" style="color: cornsilk;">{{heading}}</h1>
+<main class="index">
+    <div class="listings">
+        {% for item in items %}
+            <div class="item" style="{% if item.active %}background-color: #c6ebeb; box-shadow:none; {% else %}background-image: linear-gradient(to right, #ff416c, #ff4b2b); box-shadow:none;{% endif %}">
+                <a href="{% url 'item' item_id=item.id %}">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{item.title}}">
+                    {% else %}
+                    <!-- <img src="{% static 'listings/images/noimage.png' %}" alt="Image not available"> -->
+                    <img src="https://i.ibb.co/MBbF9nV/defaultimg.png" alt="defaultimg" >
+                    {% endif %}
+                </a>
+                <div class="details">
+                    <a href="{% url 'item' item_id=item.id %}">
+                        <h2 style="color: black;">{{ item.title }}</h2>
+                        <p style="color: #422d2d;">{{ item.description }}</p>
+                        <h3 style="color: black;">{% if item.active %}Current Price Offered{% else %}Sold at{% endif %}: ₹ {{item.current_price}}</h3>
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p>NO Item Found!<br>😔</p>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

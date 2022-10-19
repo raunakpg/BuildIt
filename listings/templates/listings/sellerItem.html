@@ -1,0 +1,115 @@
+{% extends "listings/sellerLayout.html" %}
+{% load static %}
+
+{% block title %}
+    betBid - {{ item.title }}
+{% endblock %}
+
+{% block body %}
+
+<style>
+    .brickphoto{
+        background-image: url("https://media.istockphoto.com/photos/black-brick-wall-texture-of-dark-brickwork-closeup-picture-id1129029770?k=20&m=1129029770&s=612x612&w=0&h=mf_yKAV4l4Fjfrhv8DqIWJTufluZ1KfO00UkLgmgH9w=");
+        /* color: cornsilk; */
+
+    }
+    .bgreg{
+        /* color: aqua; */
+    }
+</style>
+<h1 class="heading brickphoto" style="color: cornsilk;">{{item.title}}</h1>
+<main class="item" style="{{style}}" >
+    <div class="template">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{item.title}}">
+        {% else %}
+        <!-- <img src="{% static 'listings/images/noimage.png' %}" alt="Image not available"> -->
+        <img src="https://i.ibb.co/MBbF9nV/defaultimg.png" alt="defaultimg">
+        {% endif %}
+        <div class="details">
+            <p style="    border: 2px solid;
+            /* margin: auto; */
+            padding-left: 22px;
+            line-height: 36px;
+            font-size: 1.5rem;">{{item.description}}</p>
+            <h2 style="background: teal;"><span>{{price_tag}}:</span> ₹ {{item.current_price}}</h2>
+        </div>
+    </div>
+    <div class="info" style="background: antiquewhite;">
+        <h3><span>Listed on :</span> {{item.date}}</h3>
+        <h5><span>Owner :</span> {{item.creator}}</h5>
+        <h5><span>Contact No. :</span> {{item.contact}}</h5>
+        <h4><span>Category :</span> {{item.category.upper}}</h4> 
+    </div>
+    <div class="bid">
+        {% if item.active and user.is_authenticated %}
+            {% if user.username != item.creator %}
+            <form action="{% url 'bid' item_id=item.id %}" method="POST">
+                {% csrf_token %}
+                <!-- <p>*The bid must be at least as large as the reserve price, and must be greater than any other bids that have been placed by 10% (if any).</p> -->
+                <section>
+                    <input type="number" name="bid" min="{{ nxt_bid }}" value="{{ nxt_bid }}" required>
+                    <i class="fa fa-inr"></i>
+                </section>
+                <input id="bid_button" type="submit" value="Make Offer" style="color: black; 
+                width: 30%;
+            ">
+            </form>
+            {% else %}
+            <form action="{% url 'close' item_id=item.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Confirm</button>
+            </form>
+            {% endif %}    
+        {% endif %}
+            <div class="bid_history" style="background: lightcyan;">
+                <details open>
+                    <summary>Available Quotations:</summary>
+                    <ol>
+                        {% for bid in bids %}
+                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == temp %}(Lowest Price){% endif %}</li>
+                        {% empty %}
+                        <p> -- No quotations to display -- </p>
+                        {% endfor %}
+                    </ol>
+                </details>
+                <!-- <hr noshade>
+                <ul>
+                    <li style="color: black; font-weight: bold;">₹ {{item.reserve_price}} : @{{item.creator}} (Current Price Offered)</li>
+                </ul> -->
+            </div>
+    </div>
+    <div class="comments">
+        <h3>Comments:</h3>
+        {% if item.active and user.is_authenticated %}
+            <hr>
+            <form action="{% url 'comment' item_id=item.id %}" method="post">
+                {% csrf_token %}
+                <textarea name="comment" rows="2" placeholder="Add a comment..." maxlength="500" required ></textarea>
+                <input type="submit" value="Comment">
+            </form>
+        {% endif %}
+
+        <div class="comment_history">
+        {% for comment in comments %}
+            <hr>
+            <h5>@ {{comment.which_user}}&nbsp; • &nbsp;<span>{{comment.date}}</span></h5>
+            <p>{{comment.comment}}</p>
+        {% empty %}
+            <hr>
+            <p>No comment yet.</p> 
+        {% endfor %}
+        </div>
+    </div>
+</main>
+
+{% if not item.active %}
+    <div id="closed">
+        <img src="{% static 'listings/images/closed.png' %}" alt="closed">
+    </div>
+{% if user.is_authenticated and user.username == winner %}
+    <h2 class="winner"><span>🎇🎉Congratulations!🎉🎇<br>Deal confirmed !!</span></h2>
+{% endif %}
+{% endif %}
+
+{% endblock %}
