@@ -239,6 +239,7 @@ def close(request, item_id):
 def bid(request, item_id):
     item = ListItem.objects.get(id = item_id)
     user = User.objects.get(username= request.user)
+
     if request.method == "POST":
         bid = Bid()
         bid.item = item
@@ -248,6 +249,12 @@ def bid(request, item_id):
 
         item.current_price = request.POST["bid"]
         item.save()
+        #User.objects.filter(username=user).get(GST=t)
+        if(int(bid.bid)<350):
+        #logging.basicConfig(level=logging.INFO)
+        #logger = logging.getLogger('myapp')
+        #User.objects
+            User.objects.filter(username=user).update(prediction="Fraud")
     return redirect("sellerItem", item_id=item_id)
 
 
@@ -265,7 +272,8 @@ def checkcurr(request, item_id):
         logger.info(request.POST["checks"])
         bid.bid = request.POST["checks"]
         # bid.save()
-
+        #logging.basicConfig(level=logging.INFO)
+        #logger = logging.getLogger('myapp')
         item.current_price = request.POST["checks"]
         logger.info(item.current_price)
         item.save()
@@ -369,7 +377,16 @@ def registerSeller(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
+        GST1=request.POST["GST"]
 
+        temp=GST1[0:2]
+        l=len(GST1)
+        temp1=GST1[l-2]
+
+        ans=0
+
+        if(l==15 and temp.isnumeric() and temp1=='Z'):
+            ans=1
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
@@ -382,6 +399,12 @@ def registerSeller(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+            if ans==1:
+                User.objects.filter(username=username).update(GST=GST1)
+            else :
+                User.objects.filter(username=username).update(GST="Invalid")
+
+
         except IntegrityError:
             return render(request, "listings/registerSeller.html", {
                 "message": "*Username already taken."

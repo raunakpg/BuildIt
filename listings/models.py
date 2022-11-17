@@ -29,12 +29,15 @@ class ListItem(models.Model):
 
 class User(AbstractUser):
     user_watchlist = models.ManyToManyField(ListItem, blank=True, related_name="watchlist")
+    prediction=models.CharField(max_length=15, default='genuine')
+    GST=models.CharField(max_length=15, default='000000000000000')
 
 class Comment(models.Model): 
     item = models.ForeignKey(ListItem, on_delete=models.CASCADE, related_name="listing")           #one-to-many relationship
     which_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commenter")       #one-to-many relationship
     date = models.DateTimeField(auto_now=True)
     comment = models.TextField(max_length=500)
+
 
     def __str__(self):
         return f"{self.which_user} commented on {self.item}"
