@@ -19,7 +19,8 @@
 <main class="index">
     <div class="listings">
         {% for item in items %}
-            <div class="item" style="{% if item.active %}background-color: #c6ebeb; box-shadow:none; {% else %}background-image: linear-gradient(to right, #ff416c, #ff4b2b); box-shadow:none;{% endif %}">
+            <div class="item" style="{% if item.active %}background-color: #c6ebeb; box-shadow:none; {% else %}
+            background-color: lightgreen; box-shadow:none;{% endif %}">
                 <a href="{% url 'item' item_id=item.id %}">
                     {% if item.image %}
                     <img src="{{ item.image.url }}" alt="{{item.title}}">
@@ -31,7 +32,7 @@
                 <div class="details">
                     <a href="{% url 'item' item_id=item.id %}">
                         <h2 style="color: black;">{{ item.title }}</h2>
-                        <p style="color: #422d2d;">{{ item.description }}</p>
+                        <p style="color: black">{{ item.description }}</p>
                         <h3 style="color: black;">{% if item.active %}Current Price Offered{% else %}Sold at{% endif %}: ₹ {{item.current_price}}</h3>
                     </a>
                 </div>

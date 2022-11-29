@@ -26,5 +26,10 @@ urlpatterns = [
     path('categories/', views.categories, name="categories"),
     path('categories/<str:category>', views.category, name="category"),
     path('my_listings/', views.my_listings, name="my_listings"),
-    path('wins/', views.wins, name="wins")
+    path('wins/', views.wins, name="wins"),
+    path('create-checkout-session/', views.create_checkout_session, name='checkout'),
+    path('success.html/', views.success,name='success'),
+    path('cancel.html/', views.cancel,name='cancel'),
+    path('completeOrder', views.completeOrder,name='completeOrder'),
 ]
+

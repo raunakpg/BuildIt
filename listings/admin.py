@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from .models import Order
 class ListItemAdmin(admin.ModelAdmin):
     list_display = ("title", "description", "category", "reserve_price", "current_price", "creator", "date")
 
@@ -15,3 +15,6 @@ admin.site.register(User)
 admin.site.register(ListItem, ListItemAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Bid, BidAdmin)
+
+
+admin.site.register(Order)

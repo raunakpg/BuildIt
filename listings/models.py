@@ -51,3 +51,14 @@ class Bid(models.Model):
         return f"{self.bidder} bid Rs.{self.bid} on {self.item}"
 
 
+#payment
+
+class Order(models.Model):
+    email = models.EmailField(max_length=254)
+    paid = models.BooleanField(default="False")
+    amount = models.IntegerField(default=0)
+    description = models.CharField(default=None,max_length=800)
+    def __str__(self):
+        return self.email
+
+

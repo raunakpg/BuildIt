@@ -87,7 +87,7 @@
                         {% for bid in bids %}
                         
                        <li>₹ {{bid.bid}} : @{{bid.bidder}} {% if bid.bid == item.current_price %}{% endif %}<form style="display: contents;" method="post" action="{% url 'checkcurr' item_id=item.id %}">{% csrf_token %}<button class="checkbtn" type="submit" name="checks" id="" style="margin-left: 10px; width: 126px;
-                        height: 28px;" value={{bid.bid}}><span style="color: green;">Confirm</span></form></li>
+                        height: 28px;" value={{bid.bid}}><span style="color: green;">Pay Now</span></form></li>
 
                         {% empty %}
                         <p> -- No quotations to display -- </p>

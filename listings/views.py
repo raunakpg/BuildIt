@@ -7,6 +7,12 @@ from django.shortcuts import redirect
 from django.urls import reverse
 import logging
 
+import stripe
+
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import User, ListItem, Comment, Bid
 
 def sellerIndex(request):
@@ -232,6 +238,8 @@ def sellerItem(request, item_id):
 def close(request, item_id):
     item = ListItem.objects.get(id = item_id)
     item.active = False
+    global temp_item_id
+    temp_item_id=item_id
     item.save()
     return redirect("item", item_id=item_id)
 
@@ -257,7 +265,8 @@ def bid(request, item_id):
             User.objects.filter(username=user).update(prediction="Fraud")
     return redirect("sellerItem", item_id=item_id)
 
-
+top_price=1000
+temp_item_id=0
 @login_required(login_url="login")
 def checkcurr(request, item_id):
     # return redirect("item", item_id=item_id)
@@ -275,11 +284,19 @@ def checkcurr(request, item_id):
         #logging.basicConfig(level=logging.INFO)
         #logger = logging.getLogger('myapp')
         item.current_price = request.POST["checks"]
-        logger.info(item.current_price)
+        global top_price 
+        top_price = int(item.current_price)
+        #logger.info(item.current_price)
         item.save()
 
     close(request, item_id=item_id)
-    return redirect("item", item_id=item_id)
+    
+    #return redirect("item", item_id=item_id)
+    return render(request, "checkout.html")
+
+
+def completeOrder(request):
+    return redirect("item", item_id=temp_item_id)
 
 @login_required(login_url="login")
 def comment(request, item_id):
@@ -413,3 +430,41 @@ def registerSeller(request):
         return HttpResponseRedirect(reverse("sellerIndex"))
     else:
         return render(request, "listings/registerSeller.html")
+
+
+#payment
+
+
+stripe.api_key = settings.STRIPE_PRIVATE_KEY
+YOUR_DOMAIN = 'http://127.0.0.1:8000'
+
+@csrf_exempt
+def create_checkout_session(request):
+ session = stripe.checkout.Session.create(
+ payment_method_types=['card'],
+ line_items=[{
+ 'price_data': {
+ 'currency': 'inr',
+ 'product_data': {
+ 'name': 'Total Amount',
+ },
+ 'unit_amount': top_price *100,
+ },
+ 'quantity': 1,
+ }],
+ mode='payment',
+ success_url=YOUR_DOMAIN + '/success.html',
+ cancel_url=YOUR_DOMAIN + '/cancel.html',
+ )
+ return JsonResponse({'id': session.id})
+
+def home(request):
+ return render(request,'checkout.html')
+
+#success view
+def success(request):
+ return render(request,'success.html')
+
+ #cancel view
+def cancel(request):
+ return render(request,'cancel.html')

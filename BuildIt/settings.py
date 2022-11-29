@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'livereload',
     'django.contrib.staticfiles',
     'MLModel',
+    'tutorial',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'listings/static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'listings/static/media/')
 MEDIA_URL = '/media/'
+
+STRIPE_PUBLIC_KEY='pk_test_51M9R05SIaagkQsszoaRE59zwQzxsj80nuCpWG0rhkl5Ck9zSBlCZml9LQYk5qdmVhJcAo10f9lQNVwFM0SISiWhW00dDnZY2fY'
+STRIPE_PRIVATE_KEY='sk_test_51M9R05SIaagkQsszqwY8EOZXrstefrWlEq1tLZjwA3AgRgM4BcyNaiDEWoq6XuLM2DpZuoA7yO7Oam03WytZ6nxg008LkvUtgS'
+STRIPE_ENDPOINT_SECRET = ''
